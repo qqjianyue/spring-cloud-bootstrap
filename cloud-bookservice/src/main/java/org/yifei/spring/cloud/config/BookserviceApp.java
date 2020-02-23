@@ -1,8 +1,10 @@
 package org.yifei.spring.cloud.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,14 @@ public class BookserviceApp {
             new Book(1L, "Baeldung goes to the market", "Tim Schimandle"),
             new Book(2L, "Baeldung goes to the park", "Slavisa")
     );
+
+    @Autowired
+    Environment env;
+
+    @GetMapping("/port")
+    public String getPort() {
+        return env.getProperty("server.port");
+    }
 
     @GetMapping("")
     public List<Book> findAllBooks() {

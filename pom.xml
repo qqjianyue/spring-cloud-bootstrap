@@ -7,7 +7,7 @@
     <groupId>org.yifei</groupId>
     <artifactId>spring-cloud-bootstrap</artifactId>
     <version>1.0-SNAPSHOT</version>
-	<type>pom</type>
+	<packaging>pom</packaging>
 
 	<modules>
 		<module>cloud-config</module>
