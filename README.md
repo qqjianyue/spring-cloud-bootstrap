@@ -4,7 +4,7 @@ https://www.baeldung.com/spring-cloud-bootstrapping
 https://github.com/eugenp/tutorials/tree/master/spring-cloud/spring-cloud-bootstrap  
 Upgrade spring cloud to Hoxton.SR1 and spring boot to 2.2.1  
 
-#Demo 1, Config server + Eureka + Zull + 2 servies
+# Demo 1 Config server + Eureka + Zull + 2 servies
 Demonstrate basic configuration for those services  
 Demonstrate ribbon client-side load balancer embedded in spring Zuul component 
 
