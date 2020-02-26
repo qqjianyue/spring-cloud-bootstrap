@@ -30,3 +30,39 @@ If any error, please check service log, such as port confliction, configuration 
 
 Access below url several times, it should show you two port number of BookserviceApp in turn   
 http://localhost:18080/bookservice/books/port  
+
+## Review flexible configuration in config server
+Refer to quick start: https://cloud.spring.io/spring-cloud-config/reference/html/#_quick_start
+
+/{application}/{profile}[/{label}]  
+/{application}-{profile}.yml  
+/{label}/{application}-{profile}.yml  
+/{application}-{profile}.properties  
+/{label}/{application}-{profile}.properties  
+
+The 1st endpoint is more powerful, it's default endpoints for spring cloud component to retrieve config of several config name and profile combination, extended usage as below:  
+
+/{appliction}[,{application}...]/{profile}[,{profile}...][/{label}]
+
+But it cannot support several labels at one call
+### File based repository config
+Base on above config server characteristics, I prefer below file based repository config:  
+
+Native:  
+file:${user.dir}/application-config,file:${user.dir}/application-config/{profile},file:${user.dir}/application-config/{profile}/{application},file:${user.dir}/application-config/{profile}/{application}/{label},file:${user.dir}/application-config/{label},file:${user.dir}/application-config/{label}/{application},file:${user.dir}/application-config/{label}/{application}/{profile}  
+
+Git:  
+application-config,application-config/{profile},application-config/{profile}/{application},application-config/{profile}/{application}/{label},application-config/{label},application-config/{label}/{application},application-config/{label}/{application}/{profile}  
+
+#### Config folder purpose by design:  
+/: Global level configuration, refer to how to share configuration for all application  
+https://cloud.spring.io/spring-cloud-config/reference/html/#_sharing_configuration_with_all_applications  
+/{profile}: Common profiled configuration shared across different environment  
+
+/{profile}/{application}: Common profiled configuration of particular application shared across different environment 
+ 
+/{label}:  Use label as environment identifier, such as prod for production, env1 for UAT environment 1, env2 for UAT 
+environment 2 etc, so under this folder to define environment level common configuration  
+/{label}/{application}: Application level setting of particular environment  
+
+/{label}/{appication}/{profile}: Application leve setting of particular profile under specific environment
