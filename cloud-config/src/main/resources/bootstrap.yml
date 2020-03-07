@@ -13,15 +13,16 @@ spring:
         composite:
           - type: native
             order: 1
-            searchLocations: 'file:${user.dir}/application-config,file:${user.dir}/application-config/{profile},file:${user.dir}/application-config/{profile}/{application}'
-            #,file:${user.dir}/application-config/{profile}/{application}/{label},file:${user.dir}/application-config/{label},file:${user.dir}/application-config/{label}/{application},file:${user.dir}/application-config/{label}/{application}/{profile}
+            searchLocations: 'file:${user.dir}/application-config,file:${user.dir}/application-config/LOC,file:${user.dir}/application-config/LOC/profiles/{profile},file:${user.dir}/application-config/LOC/applications/{application},file:${user.dir}/application-config/LOC/{profile},file:${user.dir}/application-config/LOC/{profile}/{application}'
+            #searchLocations: 'file:${user.dir}/application-config,file:${user.dir}/application-config/LOC,file:${user.dir}/application-config/LOC/profiles/{profile},file:${user.dir}/application-config/LOC/applications/{application},file:${user.dir}/application-config/LOC/{label},file:${user.dir}/application-config/LOC/{label}/{application},file:${user.dir}/application-config/LOC/{label}/{application}/{profile}'
           - type: git
             order: 2
             uri: git@www.github.com:/qqjianyue/spring-cloud-bootstrap
             #https://github.com/qqjianyue/spring-cloud-bootstrap
             skipSslValidation: true
             timeout: 100
-            searchPaths: 'application-config,application-config/{profile},application-config/{profile}/{application},application-config/{profile}/{application}/*'
+            searchPaths: 'application-config,application-config/LOC,application-config/LOC/profiles/{profile},application-config/LOC/applications/{application},application-config/LOC/{profile},application-config/LOC/{profile}/{application}'
+            #searchPaths: 'application-config,application-config/LOC,application-config/LOC/profiles/{profile},application-config/LOC/applications/{application},application-config/LOC/{label},application-config/LOC/{label}/{application},application-config/LOC/{label}/{application}/{profile}'
             ignoreLocalSshSettings: true
             #hostKey: cXFqaWFueXVl
             #qqjianyue
