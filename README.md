@@ -23,6 +23,15 @@ Intellij will replace ${user.dir} to spring-cloud-bootstrapping path, while in E
 4. Start GatewayApp.java  
 5. Start RatingserviceApp.java  
 6. Start BookserviceApp.java twice, one with 'peer1' profile, the other with 'peer2' profile  
+---
+Alternately we can run mvn command to startup all service, navigate to project root folder:  
+mvn spring-boot:run -f cloud-config/pom.xml  
+timeout /t 10 /nobreak  
+mvn spring-boot:run -f cloud-eureka/pom.xml  
+mvn spring-boot:run -f cloud-gateway/pom.xml  
+mvn spring-boot:run -f cloud-bookservice/pom.xml -Dspring.profiles.include=peer1  
+mvn spring-boot:run -f cloud-bookservice/pom.xml -Dspring.profiles.include=peer2  
+---
 7. Verification  
 If all services start correctly, you should have services run in Intellij as below  
 If any error, please check service log, such as port confliction, configuration path wrongness should make the problem  
