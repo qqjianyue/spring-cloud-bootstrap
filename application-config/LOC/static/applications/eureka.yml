@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: eureka
+#for profile level definition
+server:
+  port: 0
+#for eureka server's inner client, we don't prefer same zone, so that to sync registries between different eureka server
+profile:
+  eureka:
+    server:
+      prefersamezone: true
+eureka:
+  server:
+    enableSelfPreservation: false

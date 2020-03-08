@@ -1,0 +1,10 @@
+eureka:
+  client:
+    region: chinaSouth
+    availabilityZones:
+      chinaSouth: chinaSouthZone1,chinaSouthZone2
+    serviceUrl:
+      chinaSouthZone1: http://peer1:18010/eureka
+      chinaSouthZone2: http://peer2:18011/eureka
+    #serviceUrl:
+    #  defaultZone: http://peer1:18010/eureka,http://peer2:18011/eureka

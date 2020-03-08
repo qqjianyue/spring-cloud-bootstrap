@@ -1,0 +1,4 @@
+profile:
+  eureka:
+    instance:
+      zone: chinaSouthZone2

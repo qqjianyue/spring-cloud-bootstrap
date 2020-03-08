@@ -1,0 +1,7 @@
+eureka:
+  client:
+    enabled: false
+#    register-with-eureka: false
+#    fetch-registry: false
+#  instance:
+#    instance-enabled-onit: false

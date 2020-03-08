@@ -1,0 +1,15 @@
+eureka:
+  instance:
+    preferIpAddress: true
+    statusPageUrlPath: /actuator/info
+    healthCheckUrlPath: /actuator/health
+    hostname: ${app.hostname:peer1}
+    #Can meta data map be merged from each in-scope configuration file? if not, we have to define full-set meta data map in each application instance
+    metadataMap:
+      zone: ${profile.eureka.instance.zone:chinaSouthZone1}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    registryFetchIntervalSeconds: 5
+    preferSameZoneEureka: ${profile.eureka.server.prefersamezone:true}
+    #fetch-remote-regions-registry: false
