@@ -31,7 +31,7 @@ Intellij will replace ${user.dir} to spring-cloud-bootstrapping path, while in E
 
 ------------
 
-Alternately we can run mvn command to startup all service, navigate to project root folder:  
+Alternately we can run mvn command to startup all services, navigate to project root folder:  
 mvn spring-boot:run -f cloud-config/pom.xml  
 timeout /t 10 /nobreak  
 mvn spring-boot:run -f cloud-eureka/pom.xml  
@@ -87,3 +87,37 @@ environment 2 etc, so under this folder to define environment level common confi
 /{label}/{application}: Application level setting of particular environment  
 
 /{label}/{appication}/{profile}: Application leve setting of particular profile under specific environment
+
+## Demo 2 Eureka multiple zones
+[codebase](https://github.com/qqjianyue/spring-cloud-bootstrap/tree/eurekaZones "codebase")  
+
+![Image](http://i1.fuimg.com/710524/2a68c2468fbff3c8.png)
+Steps to demo:  
+1. Create virtual hostname by editing local DNS mapping  
+Linux: /etc/hosts  
+MacOS: /etc/hosts  
+Window: C:\Windows\System32\drivers\etc\hosts  
+
+Append below lines:  
+127.0.0.1	peer1  
+127.0.0.1	peer2  
+
+2. Navigate to project root folder and run commands:  
+mvn spring-boot:run -f cloud-config/pom.xml  -Dspring.profiles.include=peer1  
+mvn spring-boot:run -f cloud-config/pom.xml  -Dspring.profiles.include=peer2  
+timeout /t 10 /nobreak  
+mvn spring-boot:run -f cloud-eureka/pom.xml  -Dspring.profiles.include=peer1  
+mvn spring-boot:run -f cloud-eureka/pom.xml  -Dspring.profiles.include=peer2  
+mvn spring-boot:run -f cloud-gateway/pom.xml  -Dspring.profiles.include=peer1  
+mvn spring-boot:run -f cloud-gateway/pom.xml  -Dspring.profiles.include=peer2  
+mvn spring-boot:run -f cloud-bookservice/pom.xml -Dspring.profiles.include=peer1  
+mvn spring-boot:run -f cloud-bookservice/pom.xml -Dspring.profiles.include=peer2  
+3. Eureka instances  
+Accessing http://localhost:18010/, can see all services with two instances distributing in two zones
+![Image](http://i1.fuimg.com/710524/9f8ed1d982b92330.png)
+
+4. Verification
+Accessing below url several times, it show you consistent port number, that's because by default gateway forward request to the same zone(zone1), and we have only one bookservice at zone1  
+http://localhost:18081/bookservice/books/port  
+Accessing below url several times, it show you another consistent port number, that's bookservice port number in zone2
+
